@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Algorithm Analysis is a program which lets you visually analyze algorithms.
+Just select the grid size for a map of mxn, and then make your own map, and
+analyze how does algorithms perform.
  */
 package algo.analysis;
 
@@ -28,12 +28,15 @@ public class AlgoAnalysis {
     static JButton source;
     static JButton goal;
     static Color curr_color;
+    static ArrayList<Node> map;
+    static ArrayList<JButton> modes;
     public static void main(String[] args) {
         jf = new JFrame("Analyze");
         jf.setSize(800,800);
         jf.setResizable(true);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
+        
+        map = new ArrayList<Node>();
         source = null;
         goal = null;
         //initialize the function, get the m and n value
@@ -111,14 +114,7 @@ public class AlgoAnalysis {
         }
         jf.remove(jp);
     }
-    
-    static class InitNext implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent ae){
-            done = true;
-        }
-    }
-    
+       
     static void map_making(){
         
         //setting up current GUI
@@ -127,32 +123,38 @@ public class AlgoAnalysis {
         JPanel jp2 = new JPanel();
         jp.setLayout(new GridLayout(M,N));
         jp2.setLayout(new GridLayout(1,4));
-        
+        modes = new ArrayList<JButton>();
         //height, width of indivdual button, adding buttons
         int x=1;
         int y=1;
         for(int i=0; i<M*N; i++){
             jb = new JButton( );
-            jb.setName(Integer.toString(x)+","+ Integer.toString(y));
             jb.addActionListener(new color());
             jp.add(jb, BorderLayout.PAGE_START);
+            
+            //add node to map
+            map.add(new Node(jb, x,y));
             
             if(x+1<=N)++x;
             else{++y; x=1;}
         }
         
         jb = new JButton("Set Source");
+        jb.setBackground(Color.orange);
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
+        modes.add(jb);
         
         jb = new JButton("Set Goal");
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
+        modes.add(jb);
         
         jb = new JButton("Set Obstacles");
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
-
+        modes.add(jb);
+        
         jb = new JButton("Play");
         jb.addActionListener(new InitNext());
         jp2.add(jb, BorderLayout.CENTER);
@@ -163,18 +165,30 @@ public class AlgoAnalysis {
         jf.setVisible(true);
         
         //setting default edit
-        curr_color = Color.RED;
+        curr_color = Color.green;
         
         done = false;
         //wait for user to go next
         while(!done){
             System.out.println("waiting");
         }
+        for(Node curr : map){
+            curr.jb.setEnabled(false);
+        }
         jf.remove(jp2);
         jf.setVisible(true);
         
     }
     
+    //marks done next, indicates to go to next frame
+    static class InitNext implements ActionListener{
+       @Override
+       public void actionPerformed(ActionEvent ae){
+           done = true;
+       }
+    }
+ 
+    //changes color of nodes (buttons)
     static class color implements ActionListener{
 
         @Override
@@ -197,20 +211,25 @@ public class AlgoAnalysis {
         
     }
     
+    //changes edit mode
     static class mode implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
             JButton jb = (JButton) ae.getSource();
+            jb.setBackground(Color.ORANGE);
             if(jb.getText() == "Set Source"){
-                curr_color = Color.red;
+                curr_color = Color.green;
             }
             
             else if(jb.getText() == "Set Goal"){
-                curr_color = Color.green;
+                curr_color = Color.red;
             }
             else if(jb.getText() == "Set Obstacles"){
                 curr_color = Color.black;
+            }
+            for(JButton x : modes){
+                if(x != jb)x.setBackground(null);
             }
             
             
