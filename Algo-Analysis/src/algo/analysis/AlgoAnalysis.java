@@ -27,6 +27,8 @@ public class AlgoAnalysis {
     static JFrame jf;
     static JButton source;
     static JButton goal;
+    static Node source_node;
+    static Node goal_node;
     static Color curr_color;
     static ArrayList<Node> map;
     static ArrayList<JButton> modes;
@@ -47,6 +49,9 @@ public class AlgoAnalysis {
         
         //show mxn grid
         map_making();
+        
+        //solve the map
+        new BFS(map, goal_node, source_node).start();
         
     }
     
@@ -79,6 +84,9 @@ public class AlgoAnalysis {
         jp.add(jb, BorderLayout.SOUTH);
                  
         jf.add(jp);
+        //to set next button defult to work with enter
+        jf.getRootPane().setDefaultButton(jb);
+        
         jf.setVisible(true);
         done = false;
         while(!done){
@@ -105,7 +113,10 @@ public class AlgoAnalysis {
         jp.add(jl, BorderLayout.CENTER);
         jp.add(jb, BorderLayout.SOUTH);
                  
-        jf.add(jp);
+        jf.add(jp, BorderLayout.CENTER);
+        
+        //to set next button defult to work with enter
+        jf.getRootPane().setDefaultButton(jb);
         jf.setVisible(true);
         
         done = false;
@@ -174,6 +185,8 @@ public class AlgoAnalysis {
         }
         for(Node curr : map){
             curr.jb.setEnabled(false);
+            if(curr.jb==source)source_node=curr;
+            if(curr.jb==goal)goal_node=curr;
         }
         jf.remove(jp2);
         jf.setVisible(true);
@@ -194,6 +207,11 @@ public class AlgoAnalysis {
         @Override
         public void actionPerformed(ActionEvent ae) {
             JButton jb = (JButton) ae.getSource();
+            
+            if(source==jb){source=null;}
+            if(goal==jb){goal=null;}
+            
+            
             if(curr_color == Color.red){
                 if (goal != null)
                     goal.setBackground(null);
@@ -205,6 +223,8 @@ public class AlgoAnalysis {
                     source.setBackground(null);
                 source = jb;
             }
+            
+            
             jb.setBackground(curr_color);
             
         }
