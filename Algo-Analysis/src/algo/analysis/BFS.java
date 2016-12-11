@@ -32,13 +32,17 @@ public class BFS extends Thread {
         Node curr = find_goal();
         source.setColor(Color.green);
         goal.setColor(Color.red);
-        if(curr==null)return;
+        if(curr==null){
+            reset(false);
+            return;
+        }
         
         curr = curr.parent;
         while(curr.distance !=0){
             curr.setColor(Color.CYAN);
             curr = curr.parent;
         }
+        reset(true);
     }
     private Node find_goal(){
         //list of seen 
@@ -56,7 +60,7 @@ public class BFS extends Thread {
             curr.setColor(Color.ORANGE); //current node
             childs = curr.neighbor(map);
             for(Node n : childs){
-                if(n.distance != -1 || n.distance > curr.distance+1){
+                if(n.distance == -1 || n.distance > curr.distance+1){
                     n.parent = curr;
                     n.distance = curr.distance + 1;
                 }
@@ -72,10 +76,21 @@ public class BFS extends Thread {
                     Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            visited.add(curr);
             
             
         }
         return null; //didn't find a solution
     }
+    
+    private void reset(boolean isPath){
+        Color myColor = (isPath)?Color.WHITE:Color.GRAY;
+        for(Node x : map){
+            if(x.getColor()!= Color.red && x.getColor()!= Color.green && x.getColor()!= Color.black &&x.getColor()!= Color.CYAN){
+                x.setColor(myColor);
+            } 
+        }
+    }
+   
     
 }
