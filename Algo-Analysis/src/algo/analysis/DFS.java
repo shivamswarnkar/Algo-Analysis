@@ -5,7 +5,9 @@
  */
 package algo.analysis;
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.*;
@@ -17,12 +19,12 @@ import java.util.logging.Logger;
  *
  * @author Ramnarayan
  */
-public class BFS extends Thread {
+public class DFS extends Thread {
     ArrayList<Node> map;
     ArrayList<Node> path;
     Node goal;
     Node source;
-    BFS(ArrayList<Node> problem, Node the_goal, Node the_source){
+    DFS(ArrayList<Node> problem, Node the_goal, Node the_source){
         map=problem;
         goal=the_goal;
         source=the_source;
@@ -43,10 +45,11 @@ public class BFS extends Thread {
             curr = curr.parent;
         }
         reset(true);
+        
     }
     private Node find_goal(){
         //list of seen 
-        Queue<Node> visit = new LinkedList<Node>();
+        Deque<Node> visit = new ArrayDeque<Node>();
         Node curr;
         ArrayList<Node> childs = new ArrayList<>();
         ArrayList<Node> visited = new ArrayList<>();
@@ -55,7 +58,7 @@ public class BFS extends Thread {
         visit.add(source);
         
         while(!visit.isEmpty()){
-            curr = visit.poll();
+            curr = visit.pop();
             if(curr == goal)return curr;
             curr.setColor(Color.ORANGE); //current node
             childs = curr.neighbor(map);
@@ -65,11 +68,16 @@ public class BFS extends Thread {
                     n.distance = curr.distance + 1;
                 }
                 if(!visit.contains(n) && !visited.contains(n)){
-                    visit.add(n);
+                    visit.push(n);
                     n.setColor(Color.MAGENTA);
                      //pause for 1 second, just for visuals
                     try {
-                        TimeUnit.MILLISECONDS.sleep(20);
+                        if(map.size()<50){
+                        TimeUnit.MILLISECONDS.sleep(200);
+                        }
+                        else{
+                            TimeUnit.MILLISECONDS.sleep(20000/map.size());
+                        }
                     } catch (InterruptedException ex) {
                         Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                     }

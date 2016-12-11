@@ -56,7 +56,7 @@ public class Node {
         //up, down, side neighbors 
         if((a==x && (b==y-1 || b==y+1)) || (b==y && (a==x-1 || a==x+1)))return true;
         //digonal neighbors
-        if((a==x-1 && b==y-1) || (a==x+1 && b==y+1) || (a==x+1 && b==y-1)|| (a==x-1 && b==y+1))return true;
+        //if((a==x-1 && b==y-1) || (a==x+1 && b==y+1) || (a==x+1 && b==y-1)|| (a==x-1 && b==y+1))return true;
         return false;
     }
     

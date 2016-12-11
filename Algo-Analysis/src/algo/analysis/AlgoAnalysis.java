@@ -53,6 +53,7 @@ public class AlgoAnalysis {
         //solve the map
         new BFS(map, goal_node, source_node).start();
         
+        
     }
     
     
