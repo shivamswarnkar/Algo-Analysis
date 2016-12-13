@@ -139,11 +139,18 @@ public class AlgoAnalysis {
         //define a frame
         jp = new JPanel();
         jl = new JLabel("Instructions: Please \n Read");
+        JTextArea j2 = new JTextArea("Instructions: Please \n Read");
+        String inst="In next page, you will create a map of size "+Integer.toString(M)+"X"+Integer.toString(N)+"\n";
+        inst += "At the bottom of the window, you can select the edit mode.\n Select Goal to set Goal, Source to set starting point.\n";
+        inst += "And you can click again to delete the colors. \nOnce you're done, you can procceed to analysis window.\n Where at the bottom,";
+        inst += "you can find a control scroll which \ncan be used to control the speed of map exploration";
+        j2.setText(inst);
         jb = new JButton("Next");
         jb.addActionListener(new InitNext());
         
         jb.setSize(100,100);
-        jp.add(jl, BorderLayout.CENTER);
+        jp.add(jl, BorderLayout.PAGE_START);
+        jp.add(j2, BorderLayout.CENTER);
         jp.add(jb, BorderLayout.SOUTH);
         jf.add(jp, BorderLayout.CENTER);
         
