@@ -86,6 +86,7 @@ public class AlgoAnalysis {
         m = new JTextField();
         n = new JTextField();
         jb = new JButton("Next");
+        jb.setOpaque(true);
         jb.addActionListener(new InitNext());
         
         m.setToolTipText("Enter m: ");
@@ -147,6 +148,7 @@ public class AlgoAnalysis {
         inst +="Orange: visited\nBlue: Current Node\nCyan:Best Path\nDark Grey: No Solution\n";
         j2.setText(inst);
         jb = new JButton("Next");
+        jb.setOpaque(true);
         jb.addActionListener(new InitNext());
         
         jb.setSize(100,100);
@@ -180,6 +182,7 @@ public class AlgoAnalysis {
         int y=1;
         for(int i=0; i<M*N; i++){
             jb = new JButton( );
+            jb.setOpaque(true);
             jb.addActionListener(new color());
             jp.add(jb, BorderLayout.PAGE_START);
             
@@ -191,22 +194,26 @@ public class AlgoAnalysis {
         }
         
         jb = new JButton("Set Source");
+        jb.setOpaque(true);
         jb.setBackground(Color.orange);
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
         modes.add(jb);
         
         jb = new JButton("Set Goal");
+        jb.setOpaque(true);
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
         modes.add(jb);
         
         jb = new JButton("Set Obstacles");
+        jb.setOpaque(true);
         jb.addActionListener(new mode());
         jp2.add(jb, BorderLayout.CENTER);
         modes.add(jb);
         
         jb = new JButton("Play");
+        jb.setOpaque(true);
         jb.addActionListener(new InitNext());
         jp2.add(jb, BorderLayout.CENTER);
         
