@@ -28,8 +28,8 @@ public class AlgoAnalysis {
     static JButton source;
     static JButton goal;
     static JSlider js;
-    static Node source_node;
-    static Node goal_node;
+    public static Node source_node;
+    public static Node goal_node;
     static Color curr_color;
     static ArrayList<Node> map;
     static ArrayList<JButton> modes;
@@ -56,8 +56,8 @@ public class AlgoAnalysis {
         
         //solve the map
         //new BFS(map, goal_node, source_node, js).start();
-        new AStar(map, goal_node, source_node, js).start();
-        //new BFS(map, goal_node, source_node).start();
+        //new AStar(map, goal_node, source_node, js).start();
+        //new DFS(map, goal_node, source_node, js).start();
         
         
     }

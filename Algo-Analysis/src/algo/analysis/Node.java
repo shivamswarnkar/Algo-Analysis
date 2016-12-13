@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  * @author Ramnarayan
  */
-public class Node {
+public class Node{
     int x; //x cordinate
     int y; //y cordinate
     JButton jb; //button representing this node
@@ -36,9 +36,10 @@ public class Node {
         
     }
     
+    
     //simple distance 
     public double distance(Node aNode){
-        return Math.sqrt(Math.pow(x-aNode.x, 2)+Math.pow(y-aNode.y,2));
+        return (Math.pow(x-aNode.x, 2)+Math.pow(y-aNode.y,2));
     } 
     
     public ArrayList<Node> neighbor(ArrayList<Node> map){
@@ -64,5 +65,8 @@ public class Node {
         if(digonal && ((a==x-1 && b==y-1) || (a==x+1 && b==y+1) || (a==x+1 && b==y-1)|| (a==x-1 && b==y+1)))return true;
         return false;
     }
+
+    
+    
     
 }

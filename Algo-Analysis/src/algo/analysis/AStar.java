@@ -6,7 +6,10 @@
 package algo.analysis;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -47,44 +50,43 @@ public class AStar extends Thread {
     }
     private Node find_goal(){
         //list of seen 
-        Queue<Node> visit = new LinkedList<Node>();
         Node curr;
         ArrayList<Node> childs = new ArrayList<>();
-        ArrayList<Node> visited = new ArrayList<>();
+        PriorityQueue<Node> open = new PriorityQueue<Node>(11, new comparableNodes());
+        ArrayList<Node> closed = new ArrayList<>();
         
         source.distance=0;
-        visit.add(source);
+        open.add(source);
         
-        while(!visit.isEmpty()){
-            curr = visit.poll();
+        while(!open.isEmpty()){
+            curr = open.remove();
             if(curr == goal)return curr;
             curr.setColor(Color.ORANGE); //current node
             childs = curr.neighbor(map);
             for(Node n : childs){
-                if(n.distance == -1 || n.distance > curr.distance+1){
+                if((!open.contains(n)) && (!closed.contains(n))){
+                    open.add(n);
+                    n.parent = curr;
+                    n.distance = curr.distance + 1;
+                    n.setColor(Color.MAGENTA);
+                }
+                else if(n.distance > curr.distance + 1){
                     n.parent = curr;
                     n.distance = curr.distance + 1;
                 }
-                if(!visit.contains(n) && !visited.contains(n)){
-                    visit.add(n);
-                    n.setColor(Color.MAGENTA);
-                    
-                    try {
+                
+                try {
                      TimeUnit.MILLISECONDS.sleep(speed.getValue());
                     } catch (InterruptedException ex) {
                     Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-
-                }
+            }
+            closed.add(curr);
+       
                 
                
-            }
-            visited.add(curr);
-            
-            
-        }
-        return null; //didn't find a solution
+       }
+       return null; //didn't find a solution
     }
     
     private void reset(boolean isPath){
@@ -95,6 +97,17 @@ public class AStar extends Thread {
             } 
         }
     }
+    
+    
+    public class comparableNodes implements Comparator<Node>{
+       @Override
+        public int compare(Node a, Node b) {
+        return (int) (a.distance(AlgoAnalysis.goal_node) - b.distance(AlgoAnalysis.goal_node));
+    }
+
+    }
+
+    }
    
     
-}
+
