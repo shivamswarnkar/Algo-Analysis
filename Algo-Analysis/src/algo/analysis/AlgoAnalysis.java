@@ -35,6 +35,7 @@ public class AlgoAnalysis {
     static ArrayList<JButton> modes;
     static boolean digonalMov;
     
+    static String algo;
     
     public static void main(String[] args) {
         jf = new JFrame("Analyze");
@@ -54,10 +55,20 @@ public class AlgoAnalysis {
         //show mxn grid
         map_making();
         
+        
         //solve the map
-        //new BFS(map, goal_node, source_node, js).start();
-        //new AStar(map, goal_node, source_node, js).start();
-        //new DFS(map, goal_node, source_node, js).start();
+        if(algo=="BFS"){
+         new BFS(map, goal_node, source_node, js).start();   
+        }
+        else if(algo=="A*"){
+            new AStar(map, goal_node, source_node, js).start();
+        }
+        else if(algo=="DFS"){
+            new DFS(map, goal_node, source_node, js).start();
+        }
+        else if(algo=="Hill Climbing (modified)"){
+            new HillClimbing(map, goal_node, source_node, js).start();
+        }
         
         
     }
@@ -89,15 +100,19 @@ public class AlgoAnalysis {
         JLabel jl2;
         jl2 = new JLabel("Allow digonal movement");
         cb = new Checkbox();
+        String lst[] = {"BFS", "DFS", "A*", "Hill Climbing (modified)"};
+        JComboBox jcb = new JComboBox(lst);
+        JLabel jlJcb = new JLabel("Select Algorithm to visualize: ");
+        jp.add(jl);
+        jp.add(m);
+        jp.add(n);
+        jp.add(jlJcb);
+        jp.add(jcb);
+        jp.add(jl2);
+        jp.add(cb);         
+        jp.add(jb);
         
-        jp.add(jl, BorderLayout.LINE_START);
-        jp.add(m, BorderLayout.CENTER);
-        jp.add(n, BorderLayout.CENTER);
-        jp.add(jl2, BorderLayout.PAGE_END);         
-        jp.add(cb, BorderLayout.PAGE_END);         
-        jp.add(jb, BorderLayout.SOUTH);
-        
-        jf.add(jp, BorderLayout.CENTER);
+        jf.add(jp);
         //to set next button defult to work with enter
         jf.getRootPane().setDefaultButton(jb);
         
@@ -110,6 +125,7 @@ public class AlgoAnalysis {
         
         M =  Integer.parseInt(m.getText());
         N = Integer.parseInt(n.getText());
+        algo = (String) jcb.getSelectedItem();
         jf.remove(jp);
     }
     
