@@ -16,13 +16,13 @@ import java.util.logging.Logger;
  *
  * @author Ramnarayan
  */
-public class BFS extends Thread {
+public class AStar extends Thread {
     ArrayList<Node> map;
     ArrayList<Node> path;
     Node goal;
     Node source;
     static JSlider speed;
-    BFS(ArrayList<Node> problem, Node the_goal, Node the_source, JSlider js){
+    AStar(ArrayList<Node> problem, Node the_goal, Node the_source, JSlider js){
         map=problem;
         goal=the_goal;
         source=the_source;
@@ -68,14 +68,15 @@ public class BFS extends Thread {
                 if(!visit.contains(n) && !visited.contains(n)){
                     visit.add(n);
                     n.setColor(Color.MAGENTA);
-                     //pause for 1 second, just for visuals
-                     try {
+                    
+                    try {
                      TimeUnit.MILLISECONDS.sleep(speed.getValue());
                     } catch (InterruptedException ex) {
                     Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
+
                 }
-                
                 
                
             }

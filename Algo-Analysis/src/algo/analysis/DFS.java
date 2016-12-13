@@ -24,10 +24,12 @@ public class DFS extends Thread {
     ArrayList<Node> path;
     Node goal;
     Node source;
-    DFS(ArrayList<Node> problem, Node the_goal, Node the_source){
+    static JSlider speed;
+    DFS(ArrayList<Node> problem, Node the_goal, Node the_source, JSlider js){
         map=problem;
         goal=the_goal;
         source=the_source;
+        speed = js;
     }
     
     public void run(){
@@ -72,15 +74,11 @@ public class DFS extends Thread {
                     n.setColor(Color.MAGENTA);
                      //pause for 1 second, just for visuals
                     try {
-                        if(map.size()<50){
-                        TimeUnit.MILLISECONDS.sleep(200);
-                        }
-                        else{
-                            TimeUnit.MILLISECONDS.sleep(20000/map.size());
-                        }
+                    TimeUnit.MILLISECONDS.sleep(speed.getValue());
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                     }
+            
                 }
                 
                

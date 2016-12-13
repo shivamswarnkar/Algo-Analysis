@@ -20,15 +20,20 @@ public class Node {
     int distance; //distance from the head
     Node parent; //parent node
     Node child; //child node
+    boolean digonal;
+    
     
     //constructor
-    public Node(JButton button, int x_cordinate, int y_cordinate){
+    public Node(JButton button, int x_cordinate, int y_cordinate, boolean digonalMov){
         x = x_cordinate; //x cordinate
         y = y_cordinate; //y cordinate
         jb = button;
+        digonal = digonalMov;
+        
         parent = null;
         child = null;
         distance=-1;
+        
     }
     
     //simple distance 
@@ -56,7 +61,7 @@ public class Node {
         //up, down, side neighbors 
         if((a==x && (b==y-1 || b==y+1)) || (b==y && (a==x-1 || a==x+1)))return true;
         //digonal neighbors
-        //if((a==x-1 && b==y-1) || (a==x+1 && b==y+1) || (a==x+1 && b==y-1)|| (a==x-1 && b==y+1))return true;
+        if(digonal && ((a==x-1 && b==y-1) || (a==x+1 && b==y+1) || (a==x+1 && b==y-1)|| (a==x-1 && b==y+1)))return true;
         return false;
     }
     

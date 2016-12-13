@@ -27,11 +27,15 @@ public class AlgoAnalysis {
     static JFrame jf;
     static JButton source;
     static JButton goal;
+    static JSlider js;
     static Node source_node;
     static Node goal_node;
     static Color curr_color;
     static ArrayList<Node> map;
     static ArrayList<JButton> modes;
+    static boolean digonalMov;
+    
+    
     public static void main(String[] args) {
         jf = new JFrame("Analyze");
         jf.setSize(800,800);
@@ -51,7 +55,9 @@ public class AlgoAnalysis {
         map_making();
         
         //solve the map
-        new BFS(map, goal_node, source_node).start();
+        //new BFS(map, goal_node, source_node, js).start();
+        new AStar(map, goal_node, source_node, js).start();
+        //new BFS(map, goal_node, source_node).start();
         
         
     }
@@ -66,7 +72,7 @@ public class AlgoAnalysis {
         
         //define a frame
         jp = new JPanel();
-        jl = new JLabel("Select Grid Size: mxn");
+        jl = new JLabel("Select Grid Size (map size) : mxn");
         m = new JTextField();
         n = new JTextField();
         jb = new JButton("Next");
@@ -79,12 +85,19 @@ public class AlgoAnalysis {
         n.setColumns(10);
         jb.setSize(100,100);
         
-        jp.add(jl, BorderLayout.CENTER);
-        jp.add(m, BorderLayout.WEST);
-        jp.add(n, BorderLayout.EAST);
+        Checkbox cb;
+        JLabel jl2;
+        jl2 = new JLabel("Allow digonal movement");
+        cb = new Checkbox();
+        
+        jp.add(jl, BorderLayout.LINE_START);
+        jp.add(m, BorderLayout.CENTER);
+        jp.add(n, BorderLayout.CENTER);
+        jp.add(jl2, BorderLayout.PAGE_END);         
+        jp.add(cb, BorderLayout.PAGE_END);         
         jp.add(jb, BorderLayout.SOUTH);
-                 
-        jf.add(jp);
+        
+        jf.add(jp, BorderLayout.CENTER);
         //to set next button defult to work with enter
         jf.getRootPane().setDefaultButton(jb);
         
@@ -93,6 +106,8 @@ public class AlgoAnalysis {
         while(!done){
             System.out.println("waiting");
         }
+        digonalMov = cb.getState();
+        
         M =  Integer.parseInt(m.getText());
         N = Integer.parseInt(n.getText());
         jf.remove(jp);
@@ -103,7 +118,8 @@ public class AlgoAnalysis {
         JPanel jp;
         JLabel jl;
         JButton jb;
-      
+        
+        
         //define a frame
         jp = new JPanel();
         jl = new JLabel("Instructions: Please \n Read");
@@ -113,7 +129,6 @@ public class AlgoAnalysis {
         jb.setSize(100,100);
         jp.add(jl, BorderLayout.CENTER);
         jp.add(jb, BorderLayout.SOUTH);
-                 
         jf.add(jp, BorderLayout.CENTER);
         
         //to set next button defult to work with enter
@@ -145,7 +160,7 @@ public class AlgoAnalysis {
             jp.add(jb, BorderLayout.PAGE_START);
             
             //add node to map
-            map.add(new Node(jb, x,y));
+            map.add(new Node(jb, x,y, digonalMov));
             
             if(x+1<=N)++x;
             else{++y; x=1;}
@@ -189,7 +204,12 @@ public class AlgoAnalysis {
             if(curr.jb==source)source_node=curr;
             if(curr.jb==goal)goal_node=curr;
         }
-        jf.remove(jp2);
+        //jf.remove(jp2);
+        js = new JSlider(JSlider.HORIZONTAL, 0, 1000, 200);
+        JLabel jsJl = new JLabel("Control Speed");
+        jp2.removeAll();
+        jp2.add(jsJl, BorderLayout.PAGE_START);
+        jp2.add(js, BorderLayout.PAGE_END);
         jf.setVisible(true);
         
     }
@@ -198,7 +218,15 @@ public class AlgoAnalysis {
     static class InitNext implements ActionListener{
        @Override
        public void actionPerformed(ActionEvent ae){
+           JButton jb = (JButton) ae.getSource();
+           if(jb.getText()=="Play"){
+               if(goal!=null && source != null){
+               done=true;
+               }
+           }
+           else{
            done = true;
+           }
        }
     }
  
@@ -209,6 +237,10 @@ public class AlgoAnalysis {
         public void actionPerformed(ActionEvent ae) {
             JButton jb = (JButton) ae.getSource();
             
+            if(curr_color == jb.getBackground()){
+                jb.setBackground(null);
+                return;
+            }
             if(source==jb){source=null;}
             if(goal==jb){goal=null;}
             
