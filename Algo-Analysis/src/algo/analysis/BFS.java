@@ -58,7 +58,7 @@ public class BFS extends Thread {
         while(!visit.isEmpty()){
             curr = visit.poll();
             if(curr == goal)return curr;
-            curr.setColor(Color.ORANGE); //current node
+            curr.setColor(Color.blue); //current node
             childs = curr.neighbor(map);
             for(Node n : childs){
                 if(n.distance == -1 || n.distance > curr.distance+1){
@@ -80,6 +80,7 @@ public class BFS extends Thread {
                
             }
             visited.add(curr);
+            curr.setColor(Color.ORANGE);
             
             
         }

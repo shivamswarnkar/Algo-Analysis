@@ -7,7 +7,6 @@ package algo.analysis;
 
 import java.util.*;
 import java.io.*;
-import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -143,7 +142,9 @@ public class AlgoAnalysis {
         String inst="In next page, you will create a map of size "+Integer.toString(M)+"X"+Integer.toString(N)+"\n";
         inst += "At the bottom of the window, you can select the edit mode.\n Select Goal to set Goal, Source to set starting point.\n";
         inst += "And you can click again to delete the colors. \nOnce you're done, you can procceed to analysis window.\n Where at the bottom,";
-        inst += "you can find a control scroll which \ncan be used to control the speed of map exploration";
+        inst += "you can find a control scroll which \ncan be used to control the speed of map exploration\n";
+        inst += "Color codes:\n Red: Goal\nGreen: Source\nBlack: Obstacles\nMagenta:seen but yet to visit\n";
+        inst +="Orange: visited\nBlue: Current Node\nCyan:Best Path\nDark Grey: No Solution\n";
         j2.setText(inst);
         jb = new JButton("Next");
         jb.addActionListener(new InitNext());

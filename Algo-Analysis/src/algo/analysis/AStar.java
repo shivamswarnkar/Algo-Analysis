@@ -61,7 +61,7 @@ public class AStar extends Thread {
         while(!open.isEmpty()){
             curr = open.remove();
             if(curr == goal)return curr;
-            curr.setColor(Color.ORANGE); //current node
+            curr.setColor(Color.blue); //current node
             childs = curr.neighbor(map);
             for(Node n : childs){
                 if((!open.contains(n)) && (!closed.contains(n))){
@@ -81,6 +81,7 @@ public class AStar extends Thread {
                     Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
                     }
             }
+            curr.setColor(Color.ORANGE);
             closed.add(curr);
        
                 
