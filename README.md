@@ -1,6 +1,6 @@
-# Artificial Intelligence Group Project
+# Artificial Intelligence Project
 
-## Shivam Swarnkar, Adnan Y. Mutee, Jayson Isaac
+## Shivam Swarnkar
 
 ## December 14, 2016
 
