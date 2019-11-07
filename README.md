@@ -7,7 +7,7 @@ First Search, Depth First Search, A* and Hill Climbing.
 - [Introduction](#introduction)
 - [How to Use](#how-to-use)
 - [Project Info](#goal)
-- [Results](#results)
+- [Results](#result)
 
 
 ![Hill Climbing Solving a simple map](demo_imgs/hill_climbing.png)
