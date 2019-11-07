@@ -1,19 +1,34 @@
-# Artificial Intelligence Project
+# Algo Analysis
+Create and design a map, consisted of a goal, a starting
+point and various obstacles, and then visually analyze different algorithms as they try to find the
+best path from source to goal. For our first version, we have implemented four algorithms: Breadth
+First Search, Depth First Search, A* and Hill Climbing.
 
-## Shivam Swarnkar
+- [Introduction](#introduction)
+- [How to Use](#how-to-use)
+- [Project Info](#goal)
+- [Results](#results)
 
-## December 14, 2016
 
-## 1 Introduction
+![Hill Climbing Solving a simple map](demo_imgs/hill_climbing.png)
+
+![BFS Searching.](demo_imgs/bfs.png)
+
+![A* searching](demo_imgs/a_star.png)
+
+![DFS Searching](demo_imgs/dfs.png)
+
+
+
+## Introduction
 
 Algo-Analysis is a system which let user create and design a map, consisted of a goal, a starting
 point and various obstacles, and then visually analyze different algorithms as they try to find the
 best path from source to goal. For our first version, we have implemented four algorithms: Breadth
 First Search, Depth First Search, A* and Hill Climbing.
 
-## 2 Project
 
-## 2.1 Questions
+## Questions
 
 Is it easier to understand an algorithm by visual analysis? And is it possible to visually observe
 the algorithms and come up with good conclusions? Are there any patterns of maps where each
@@ -21,14 +36,14 @@ algorithm performs better? Is it easier to see edge cases in visual analysis pro
 rithms performs better when only visually analyzed, and how does it compare to mathematical
 analysis?
 
-## 2.2 Goals
+## Goals
 
 Goal of this project is to analyze the performance of algorithms without using complex math and
 logics, and to explain algorithms to students and people who are not familiar with it. Other goals
 were to test if users, without any prior knowledge of the algorithms, could identify the optimality,
 run time complexity and edge case possibilities for algorithms.
 
-## 2.3 Background
+## Background
 
 Algorithms are complex and hard to understand for many people. However, it’s been seen that
 people understand a problem/solution better if they can visualize it, which can also be called
@@ -37,14 +52,14 @@ to solve/explain/understand a problem. Many people prefer analyzing genetic and 
 algorithms visually. Hence we used this visual thinking idea and implemented as Algo-Analysis
 system to help students and people.
 
-## 2.4 Information
+## Information
 
 For this prototype, we are using only 4 algorithms. In which two algorithms A* and BFS always
 give the optimal (assuming that heuristic function never produce larger value than actual value),
 and one algorithm DFS may not be optimal where Hill Climbing could get stuck into local minima.
 We modified the Hill Climbing algorithm so that it knows that which nodes has already been visited.
 
-## 2.5 Experiment
+## Experiment
 
 We created various maps and tested them with the implemented four algorithms. Maps included
 the cases where source and goal were really close, source and goal were on different corner and
@@ -52,11 +67,10 @@ cases where no solutions were possible. Some maps included obstacles such that t
 seems best path was blocked at the end which had interesting results. Following are some pictures
 of the maps and AI’s trying to solve the map.
 
+![Hill Climbing Solving a simple map](demo_imgs/hill_climbing.png)
 
 ```
 Figure 1: Hill Climbing Solving a simple map.
-```
-```
 Figure 2: Smarter Map.
 ```
 Second part of experiment included people who were not familiar with any algorithms (or
@@ -65,7 +79,7 @@ visually analyze the performance and let us know which algorithms they think is 
 them if they can think of some edge cases where these algorithms might fail. And which algorithms
 are finding the best optimal solutions.
 
-### 2.6 Result
+### Result
 
 In visual analysis, we found that BFS had to look through each nodes for almost every map. But
 it performed well, and always found the best path. DFS didn’t look through as many nodes as
@@ -79,9 +93,9 @@ Not only it found the optimal path, it also looked through the least amount of n
 some examples, people started thinking about the edge cases like what if there is no map and what
 if the a path is really close to the source but blocked at the end.
 
-### 2.7 Analysis
+### Analysis
 
-visual analysis almost matched with the actual mathematical analysis. Result of algorithms’ per-
+Visual analysis almost matched with the actual mathematical analysis. Result of algorithms’ per-
 formances was as expected, however people’s behavior and learning curve was impressive. We
 intentionally made Hill Climbing weak, and let people decide how to we improve it. Some sug-
 gested to keep track of the nodes visited, some suggested to take random path when stuck (sounded
@@ -93,16 +107,24 @@ less nodes. Visual observation indicated that A* performed best, BFS always work
 almost entire map, DFS was fast in some cases but failed to find shortest path and Hill Climbing
 could perform better with some randomness. (see visual section)
 
-
-Figure 3: BFS Searching.
+![Figure 3: BFS Searching.](demo_imgs/bfs.png)
 
 ```
-Figure 4: .A* searching
+Figure 3: BFS Searching
 ```
-Figure 5: .DFS Searching
+![Figure 4: A* searching](demo_imgs/a_star.png)
 
+```
+Figure 4: A* searching
+```
 
-### 2.8 Conclusion
+![Figure 5: DFS Searching](demo_imgs/dfs.png)
+
+```
+Figure 5: DFS Searching
+```
+
+### Conclusion
 
 At the end, we concluded that our experiment and project was successful. It seems visual analysis
 matches (a lot) with mathematical analysis. One weakness of visual analysis is in close comparisons
@@ -112,15 +134,23 @@ the experiment, people seemed troubled but after the experiment, people seemed t
 it better. So our project was a success since we answered our questions and we came up with a
 prototype which could help future students with their studies of algorithms.
 
-### 2.9 Instructions to use the program
+### How To Use
 
-This project is written in Java with NetBeans. There are 4 stage in the program. First stage, you
-select the size of the grid, select which algorithm you want to test, select whether you want to
-allow diagonal movements or not. Second stage is instruction window. Third is where you create
-your map. Click on the edit mode (like set Source, set Goal, set Obstacles) and then click play.
-In fourth stage, you can control the speed of the visual analysis but using a slider in down right
-corner. Followings are the color codes.
+This project is written in Java with NetBeans. Run Algo-Analysis/src/algo/analysis/AlgoAnalysis.java to start the GUI, now follow following.
 
+There are 4 stage in the program. 
+
+```
+- First stage, you select the size of the grid, select which algorithm you want to test, select whether you want to
+allow diagonal movements or not. 
+- Second stage is instruction window. 
+- Third is where you create your map. Click on the edit mode (like set Source, set Goal, set Obstacles) and then click play.
+- In fourth stage, you can control the speed of the visual analysis but using a slider in down right
+corner. 
+```
+Followings are the color codes.
+
+```
 - Red: Goal
 - Green: Source
 - Black: Obstacles
@@ -129,7 +159,7 @@ corner. Followings are the color codes.
 - Blue: Current Node
 - Cyan:Best Path
 - Dark Grey: No Solution
-
+```
 ## References
 
 - Handbook of Research on Teaching Literacy through the Communicative and Visual Arts.
