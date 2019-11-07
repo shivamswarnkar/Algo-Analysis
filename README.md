@@ -6,7 +6,7 @@ First Search, Depth First Search, A* and Hill Climbing.
 
 - [Introduction](#introduction)
 - [How to Use](#how-to-use)
-- [Project Info](#goal)
+- [Project Info](#goals)
 - [Results](#result)
 
 
